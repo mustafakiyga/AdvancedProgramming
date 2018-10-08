@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Add Course </title>
+</head>
+
+<script>
+"use strict";
+
+function add() {
+    a.push(t1.value)
+    a.push(Number(t2.value))
+    a.push(Number(t3.value))
+    p1.innerText = ""
+    p2.innerText = ""
+    
+    p3.innerText = ""
+    p4.innerText = ""
+    p5.innerText = ""
+
+    p7.innerText = ""
+    p8.innerText = ""
+    p9.innerText = ""
+
+}
+    
+function print() {
+
+    var i;
+    for (i = 0; i < a.length; i++) { 
+        if(i!=0 & i%3==0){
+            p2.innerText += "\n\n"
+        }
+        p2.innerText += a[i] + "-";
+    }
+}
+    
+function avg() {
+    var i,avg=0;
+    for (i = 0; i < a.length; i++) { 
+        if(i%3==0){
+            avg = (a[i+1] + a[i+2])/2
+            p4.innerText += a[i] + "\n\n"
+            p5.innerText += avg + "\n\n"
+            avg=0;
+            continue
+        }
+        
+    }
+}
+    function ax() {
+    var i,avg=0,max=0,maxIndex=0;
+    for (i = 0; i < a.length; i++) { 
+        if(i%3==0){
+            avg = (a[i+1] + a[i+2])/2
+            if(max < avg ){
+                max = avg;
+                maxIndex = i;
+            }
+            
+        }
+        
+    }
+    p8.innerText = a[maxIndex]
+    p9.innerText = max
+
+}
+function cl() {
+
+    p1.innerText = ""
+    p2.innerText = ""
+    
+    p3.innerText = ""
+    p4.innerText = ""
+    p5.innerText = ""
+
+    p7.innerText = ""
+    p8.innerText = ""
+    p9.innerText = ""
+
+}
+    
+
+</script>
+
+<body>
+    <h2 id=title></h2>
+<table border=0>
+    <tr>
+        <td><b>Name</b></td>
+        <td><b><input type=text  id=t1></b></td>
+    </tr>
+    <tr>
+        <td><b>Midterm</b></td>
+        <td><input type=number  id=t2></td>
+    </tr>
+    <tr>
+        <td><b>Final</b></td>
+        <td><input type=number  id=t3></td>
+    </tr>
+</table>
+    
+
+
+<input type=button value="Add"  onClick="add()">
+<br>
+<br>
+<input type=button value="Print"  onClick="print()">&emsp;
+<input type=button value="Avg"  onClick="avg()">&nbsp;
+<input type=button value="Max"  onClick="ax()">
+<input type=button value="Clear"  onClick="cl()">
+
+
+
+
+
+<hr>
+<table border=0>
+    <tr>
+        <td><b>Name</b></td>
+        <td><b>Midterm</b></td>
+        <td><b>Final</b></td>
+    </tr>
+</table>
+
+<p id=p1></p>
+<p id=p2></p>
+    <br>
+
+<hr>
+<table border=0>
+    <tr>
+        <td><b>Name</b><br><p id=p4></p></td>
+        <td><b>Average</b><br><p id=p5></p></td>
+    </tr>
+</table>
+<p id=p3></p>
+
+    
+
+<hr>
+<table border=0>
+    <tr>
+        <td><b>Name</b></td>
+        <td><b>Max</b></td>
+    </tr>
+        <tr>
+        <td><p id=p8></p></td>
+        <td><p id=p9></p></td>
+    </tr>
+</table>
+<p id=p7></p>
+
+
+
+
+
+<p>Ref: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" 
+   target="ExternalDocument">Array - Javascript</a>
+</p>
+<p><a href="http://html.sitesi.web.tr/tablolar.html" 
+   target="ExternalDocument">Tablolar</a>
+</p>
+<script>
+
+    title.innerText = document.title;
+
+    const a = ["BP1", 60, 80,"Python",24,68];  //initially
+    
+    
+   
+</script>
+
+</body>
+</html>
