@@ -1,0 +1,153 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>File Comparison	</title>
+</head>
+
+<script>
+"use strict";
+function hide() {
+    state.style.visibility = "hidden";
+}
+
+function show(v) {
+    state.value = v; state.style.visibility = "";
+}
+
+function report(t, n) {
+    show("OK"); setTimeout(hide, 1000);
+    //out1.innerText = t;
+    //console.log(n? n : t);
+}
+
+function readText() {
+    show("FT"); // fetch text
+    fetch(url.value)
+      .then(r => r.text()) 
+      //response of fetch() is r
+      .then(addText,report);  
+      //response of text() is t
+}
+
+function addText(txt) {
+	remoteMetin = txt;
+}
+
+//READ LOCAL FILE CODES
+
+const reader = new FileReader();
+
+function isText(f) {
+    console.assert(f instanceof File);
+    return f.type.startsWith("text") || f.name.endsWith(".md")
+         || f.name.endsWith(".js") || f.name.endsWith(".java");
+}
+function fileSelect(t) { //target is the button
+    console.assert(t == button);
+	length = t.files.length;
+	console.log("T.files = " +t.files)
+    const f = t.files[0];
+    const size = " "+f.size+" bytes ";
+    msg.innerText = f.type+size;
+	
+	for(let i =0 ; i<t.files.length;i++) {
+		if (isText(t.files[i])) {
+			const reader2 = new FileReader();
+			reader2.onload = function(evt) { //text
+            const a = evt.target.result.replace(/</g, "&lt;");
+			localMetin[i] = a;
+
+            out.innerHTML = "<pre>"+a+"</pre>";
+			localName[i] = t.files[i].name;
+            
+        };
+        reader2.readAsText(t.files[i]);
+		} else {
+        msg.innerText += "Unknown ";
+        out.innerText = "";
+		}
+	}
+		
+}
+
+
+function compare(){
+
+//	console.log("Local Metin = "+localMetin)
+	console.log("Remote Metin = "+remoteMetin)
+
+	console.log("Local Files = " + "localMetin[0] = "+localMetin[0] + "\n" +  "localMetin[1] = "+localMetin[1])
+
+
+	
+	
+ 	let count = 0;
+	for(let i = 0 ; i<length;i++){
+		if(localMetin[i] == remoteMetin){
+			count++;
+		}
+	} 
+	
+	if(count==0){
+		console.log("Farklı")
+		p5.innerText = length+" items checked, all files diffrent"
+		for(let i = 0; i<localName.length;i++){
+		
+		}
+	}else{
+		console.log("Aynı")
+		
+		p5.innerText = length+" items checked, "
+		for(let i = 0; i<length;i++){
+			p5.innerText+=localName[i] +" "
+		}
+		p5.innerText += "has the same content"
+	}
+
+	
+}
+
+</script>
+
+<body>
+
+<h2 id=title></h2>
+<input type=file id=button onChange='fileSelect(this)' multiple />
+<p>
+<output id=msg>Select text or image </output>
+<output id=out></output>
+</p>
+
+<input type=text id=url value="https://maeyler.github.io/BLM305/README.md">
+<!--onChange="readText()"-->
+
+<input type=button value="text" onClick="readText()">
+
+<input type=button id=state style="visibility: hidden">
+
+<input type=button value="Compare" onClick="compare()">
+
+<pre id=out1></pre>
+
+<hr />
+<b>Result: </b>
+<pre id=p5></pre>
+<hr />
+
+<script>
+	let localMetin = []
+	let localName = []
+	let remoteMetin = ""
+	let length = 0;
+	
+    title.innerText = document.title;
+	//LOCAL FİLE
+    //sample.innerText = readText+"\n"+readBlob;
+	readText()
+</script>
+
+</body>
+</html>
