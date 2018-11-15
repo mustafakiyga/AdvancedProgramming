@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <script src="Database.js"></script>
+    <title>Timing </title>
+
+<script>
+"use strict";
+const url = "https://maeyler.github.io/JS/data/";
+let array = [], set = new Set(), map = new Map();
+
+
+function readData(file) {
+    console.log("readData "+file);
+    fetch(url+file)
+        .then(r => r.text(), console.log)
+        .then(addStudents, console.log);
+}
+function parseStudent(line) {
+    let b = line.split("\t");
+    let id = b[0], name = b[1], gpa = b[2];
+    let std = new Student(id, name, gpa);
+    let list = [];
+    for (let i=3; i<b.length; i++) 
+        list.push(b[i]);
+    std.courses = list
+    return std
+}
+function addStudents(txt) {
+	
+    let msg = "\nData contains ";
+    msg += txt.length+" chars, ";
+    let a = txt.split("\n");
+    msg += a.length+" lines \n";
+    for (let s of a) {
+	
+      let std = parseStudent(s);
+
+	  map.set(Number(std.id),std);
+	  array.push(Number(std.id)	);
+	  
+    }
+	
+
+}
+function intersect1(a, b) { //fast
+    let s = new Set()
+    for (let x of a)
+      if (b.has(x)) s.add(x)
+    return s
+}
+function intersect2(a, b) { //slow
+    let s = new Set()
+    for (let x of a)
+      for (let y of b)
+        if (x == y) s.add(x)
+    return s
+}
+
+function searchStudent() { 
+	let randomStudent = [];
+	//let count = 0;
+	let countMap=0;
+	let countArray=0;
+
+	for(let a=0; a<10000;a++){
+		let i = Math.floor((Math.random() * 100) + 1);
+		let b = i + 215150000;
+		randomStudent.push(b);
+	}
+	let t = performance.now()
+	for (let id of randomStudent){
+		if(array.includes(id)){
+			countArray++;
+		}
+	}
+	t = performance.now()-t;
+	
+	
+	let t2 = performance.now()
+	for (let id of randomStudent){
+		if(map.has(id)){
+			countMap++
+		}
+	}
+	t2 = performance.now()-t2
+	
+	console.log();
+	console.log(t2.toPrecision(3)+" msec ");
+	out.innerText += "\n"+"Array = "+t.toPrecision(3)+" msec ";
+	out.innerText += "\n"+"Map = "+t2.toPrecision(3)+" msec ";
+	out.innerText += "\n"+"Matched id of array elements = "+countArray;
+	out.innerText += "\n"+"Matched id of map keys = "+countMap;
+	
+	
+	console.log(countArray);
+	console.log(countMap);
+}
+
+function timing(f) {
+    let t = performance.now()
+    let x = f(set, set)  //calculate intersection by itself
+    t = performance.now() - t
+    let s = f.name+": "+t.toPrecision(3)+" msec "+x.size
+    out.innerText += "\n"+s; console.log(s)
+}
+
+</script>
+</head>
+
+<body>
+<h2 id=title></h2>
+<button onClick='searchStudent()'>Search</button>
+<p id=out>Results: </p>
+<hr />
+<b>Sample code</b>
+<pre id=sample></pre>
+<hr />
+
+<script>
+	//let array = [], set = new Set(), map = new Map();
+    title.innerText = document.title;
+    sample.innerText = intersect1+"\n"+intersect2;	
+	
+    readData("Students.txt")
+
+</script>
+
+</body>
+</html>
