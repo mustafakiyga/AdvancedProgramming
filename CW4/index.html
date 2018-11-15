@@ -17,27 +17,21 @@
 </p>
 <script>
         
-    class Point{
-        constructor(x,y){
-            this.x = x;
-            this.y = y;
-        }
-        toString() {
-            return " x = "+this.x+" y = " +this.y;
-        }
-    }
+class Point{
+	constructor(x,y){
+		this.x = x;
+		this.y = y;
+	}
 
-    class Point3D extends Point{
-        
-        constructor(x,y,z){
-            super(x,y);
-            this.z = z;
-        }
-                
-        toString() {
-            return " x = "+this.x+" y = " +this.y +" z = " + this.z;
-        }
-    }
+}
+
+class Point3D{
+	constructor(x,y,z){
+		super(x,y);
+		this.z = z;
+	}
+
+}
     
     class Distance{
         constructor(km){
