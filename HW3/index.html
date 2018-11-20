@@ -1,0 +1,113 @@
+
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width">
+		<title>Animations </title>
+
+	<style>
+		#sun {
+			height:100px;
+			position: absolute;
+			top:0;
+			#right: 50%;
+			left: 45%;
+			#animation:sunrise 10s infinite;
+		}
+		#sky {  
+			position: absolute;
+			width: 100%;
+			height: 50%;
+			background: lightblue;
+			
+
+		}
+		#sea {
+			position: absolute;
+			width: 100%;
+			height: 50%;
+			bottom: 0;
+			background: blue;
+		}
+		
+		#boat {
+			position: absolute;
+			left: -50%;
+			top: 30%;
+			width: 200px;
+			height: 80px;
+			#animation: left-right 20s infinite;
+		}
+
+		
+	</style>
+	  
+	</head>
+
+	<body>
+
+
+		<div id="sky">
+			 <img id="sun" src="sun.png">
+		</div>
+
+		<div id="sea">
+			<img id="boat" src="boat.png">
+		</div>
+<script>
+"use strict";
+var hm, time;  //for clock
+
+	document.getElementById("boat").animate(
+  [{transform: 'translateX(0)'}, {transform: 'translateX(3000px)'}],
+  {
+  duration: 10000,
+  iterations: Infinity
+  }
+);
+
+	document.getElementById("sun").animate(
+  [{transform: 'translateY(300px)'}, {transform: 'translateY(0px)'}, {transform: 'translateY(0px)'}, {transform: 'translateY(300px)'}],
+  {
+  duration: 10000,
+  iterations: Infinity
+  }
+);
+
+	document.getElementById("sky").animate(
+  [{background: 'black'}, {background: 'lightblue'}, {background: 'lightblue'},{background: 'black'}],
+  {
+  duration: 10000,
+  iterations: Infinity
+  }
+);
+
+function twoDigits(t) {
+    if (t>9) return ""+t;
+    return "0"+t;
+}
+function setHourMin() {
+    const d = new Date();
+    hm = twoDigits(d.getHours())+":"
+        +twoDigits(d.getMinutes());
+    document.title = "Clock "+hm; 
+    //console.log(hm);
+}
+function count() {
+    const d = new Date();
+    let sec = twoDigits(d.getSeconds());
+    if (sec == "00") setHourMin();
+    clock.innerText = hm+":"+sec;
+    time = setTimeout(count, 1000);
+}
+const 
+  t1 = { transform: ["translateX(0)", "translateX(300px)", "translateX(0)"] },
+  t2 = { transform: ["rotate(0)", "rotate(90deg)", "rotate(0)"] },
+  t3 = { background: ["yellow", "cyan", "magenta", "yellow"] },
+  t4 = { fontSize: ["100%", "150%", "100%", "75%", "100%"] };
+  title.innerText = document.title;
+  setHourMin(); count();
+</script>
+	</body>
+</html>
