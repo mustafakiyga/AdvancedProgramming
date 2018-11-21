@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Add Table</title>
+	</head>
+	<body>
+	
+		<table id="table" border="1">
+             <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Surname</th>
+				<th>Course</th>
+            </tr>
+		</table>
+		<style>
+		table {
+				border: 1px solid blue; 
+				padding: 5px 5px; 
+				text-align: center;
+		}
+
+		</style>
+	</body>
+
+
+	
+    
+    <script>
+		table = document.getElementById("table");
+		function addRows(student) {
+		 for(var i = 0; i < student.length; i++)
+				   {
+				   var newRow = table.insertRow(table.length);
+					   for(var j = 0; j < student[i].length; j++)
+					   {
+						   var cell = newRow.insertCell(j);
+						   
+						   cell.innerHTML = student[i][j];
+					   }
+				   }
+		}
+		
+				 var students = [["1732431051","Ahmet","AK","BLM301"],
+                         ["1732431073","Mehmet","KARA","BLM305"],
+                         ["1732431025","Veli","YEŞİL","BLM311"],
+                         ["1932431051","Ali","TAŞ","BLM201"],
+                         ["1232431047","Ayşe","CAN","BLM415"],]
+
+addRows(students);
+    </script>
+	<script>
+
+
+
+	</script>
+
+
+</html>
