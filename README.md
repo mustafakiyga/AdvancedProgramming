@@ -1,4 +1,5 @@
-<b>BLM305 Classwork ve Homework'ler</b><br>
+## BLM305 - Advanced Programming
+<b>Classworks<b><br>
 [CW1](https://mustafakiyga.github.io/AdvancedProgramming/CW1/CW1.jpeg)  <br>
 [CW2](https://mustafakiyga.github.io/AdvancedProgramming/CW2/CW2-Array%20Demo.html)<br>
 [CW3](https://mustafakiyga.github.io/AdvancedProgramming/CW3/inspector.html)<br>
@@ -8,7 +9,7 @@
 [CW7](https://mustafakiyga.github.io/AdvancedProgramming/CW7/CW7.html)<br>
 [CW8](https://mustafakiyga.github.io/AdvancedProgramming/CW8/CW8.png)<br>
 [CW9](https://mustafakiyga.github.io/AdvancedProgramming/CW9/CW9.html)<br><br>
-
+<b>Homeworks<b><br>
 [HW1](https://mustafakiyga.github.io/AdvancedProgramming/HW1/HW1-Add_Course.html)<br>
 [HW2](https://mustafakiyga.github.io/AdvancedProgramming/HW2/Database.html)<br>
 [HW3](https://mustafakiyga.github.io/AdvancedProgramming/HW3/index.html)<br>
