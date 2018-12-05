@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<!-- saved from url=(0051)https://maeyler.github.io/BLM305/work/Graphics.html -->
+<html lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width">
+    <title>SVG and Canvas </title>
+
+  <style>
+    svg {
+        background: cyan;
+        font: 10px arial, sans-serif;
+    }
+  </style>
+</head>
+
+<body>
+
+
+<h2>Using SVG</h2>
+
+
+<svg id="svg" width="340" height="100">
+  <circle id ="c" cx="50" cy="50" r="40" style="fill:yellow;stroke:blue;stroke-width:4"></circle>
+  <text x="35" y="55" fill="black">Circle</text>
+  <rect id="r"x="110" y="10" width="100" height="80" style="fill:pink;stroke:red;stroke-width:5"></rect>
+  <text x="145" y="55" fill="blue">Rect</text>
+
+<hr>
+
+
+
+
+<h2>Circle</h2>
+
+Select Color:<br>
+<p><input type="color" id="html5colorpicker1" value="#ff0000" style="width:15%;"></p>
+
+<table border=0>
+    <tr>
+        <td><b><button onClick='setColorArc()'>Change Color</button></b></td>
+		<td><b><button onClick='setSizeArc()'>Change Size</button></b></td>
+		<td><b><button onClick='setLocationArc()'>Change Location</button></b></td>
+    </tr>
+</table>
+<h2>Rect</h2>
+
+Select Color:<br>
+<p><input type="color" id="html5colorpicker2" value="#ff0000" style="width:15%;"></p>
+<table border=0>
+    <tr>
+        <td><b><button onClick='setColorRect()'>Change Color</button></b></td>
+		<td><b><button onClick='setSizeRect()'>Change Size</button></b></td>
+		<td><b><button onClick='setLocationRect()'>Change Location</button></b></td>
+    </tr>
+</table>
+<br>
+<hr>
+
+<p>Ref: <i>Eloquent JavaScript</i>,
+<a href="http://eloquentjavascript.net/17_canvas.html" target="ExternalDocument"> Chap 17</a>
+</p>
+
+<script>
+
+var en=100;
+var yukseklik=100;
+var cap=40;
+
+function setColorArc()
+{
+		c.style.fill=html5colorpicker1.value;
+}
+
+function setColorRect()
+{
+		r.style.fill=html5colorpicker2.value;
+}
+
+function setSizeArc()
+{
+		
+		c.style.r=25
+}
+
+function setSizeRect()
+{
+		r.style.width=150;
+		r.style.height=75;
+}
+
+function setLocationRect()
+{
+		r.style.x=130;
+		r.style.y=25;
+}
+
+function setLocationArc()
+{
+		c.style.cx=65;
+		c.style.cy=65;
+		//r.style.height=170;
+}
+
+
+</script>
+
+
+
+
+</body></html>
