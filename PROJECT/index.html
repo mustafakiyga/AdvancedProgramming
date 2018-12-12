@@ -1,0 +1,209 @@
+
+<!DOCTYPE HTML>
+<html>
+	<head>
+	  <title>Maze Game</title>
+		<style>
+	    body {
+		  background:lightblue;
+	    }
+		</style>
+		
+		<!-- <script src="index.js" defer="defer"></script> -->
+		
+		<body>
+		<div style="position: absolute; left:44%;">
+		  <button onclick="start();this.disabled = true;">Start</button>
+		  <label id="moves" style = "color:white;">Moves: 0</label>
+		</div>
+		
+		  <br>
+		  <br>
+		  <canvas id="canvas" width="480" height="480" style="margin-left:30%;border:2px solid black;"></canvas>
+		  
+		  
+		  <script>
+		  
+var array = [
+    [1,1,1,0,0,0,0,0,0,1,0,1,0,1,1],
+    [0,0,1,0,1,1,1,1,0,0,0,1,0,0,0],
+    [1,0,0,0,1,0,0,0,0,1,0,0,0,1,0],
+    [1,1,0,1,1,0,1,0,1,0,1,0,1,0,0],
+    [0,0,0,1,0,0,1,0,0,0,1,0,1,0,1],
+    [0,1,0,1,1,0,0,1,0,1,1,0,0,0,1],
+    [0,1,0,1,0,1,0,1,0,0,0,0,1,0,1],
+    [1,1,0,0,0,0,0,0,1,1,1,1,1,0,1],
+    [0,0,0,1,1,0,1,0,0,0,0,0,0,0,1],
+    [0,1,1,0,1,0,1,1,1,1,1,1,0,1,1],
+    [0,0,0,0,0,0,1,0,0,0,0,1,0,1,1],
+    [0,1,1,1,0,1,0,1,0,1,0,1,0,0,0],
+    [0,1,1,0,0,1,0,1,0,1,0,0,1,1,0],
+    [0,1,0,1,0,1,0,1,0,0,1,0,1,1,0],
+    [0,0,1,0,0,0,0,1,1,2,1,0,0,0,0]];
+
+var canvas = document.getElementById("canvas")
+var ctx = canvas.getContext("2d");
+
+var dog = new Image();
+dog.src = "dog.png";
+
+var bone = new Image();
+bone.src = "bone.png";
+
+var wall = new Image();
+wall.src = "wall.png";
+
+var maze = [];
+
+var player = new Object({
+	x:0,y:1,loc: 15, moves: 0}
+);
+
+var y = 0;
+
+
+for (var i = 0;i < 15;i++){
+	var x = 0;
+	for (var j = 0;j < 15;j++){
+		maze.push({
+			"x":x,"y":y,"state":array[i][j]}
+		);
+		x++;
+	}
+	y++;
+}
+
+function keyPress(e){
+	
+	switch(e.keyCode){
+		case 39:  //Right arrow pressed
+		if (player.x != 14){
+			player.loc ++;
+			if (maze[player.loc].state != 1){
+				ctx.clearRect(player.x * 32,player.y * 32, 32, 32);
+				player.x++;
+				player.moves ++;
+			}
+			else {
+				player.loc --;
+			}
+		}
+		break;
+		case 68: //D pressed
+			if (player.x != 14){
+				player.loc ++;
+				if (maze[player.loc].state != 1){
+					ctx.clearRect(player.x * 32,player.y * 32, 32, 32);
+					player.x++;
+					player.moves ++;
+				}
+				else {
+					player.loc --;
+				}
+			}
+			break;
+		case 37:  /* Left arrow pressed */
+			if (player.x != 0){
+				player.loc --;
+				if (maze[player.loc].state != 1){
+					ctx.clearRect(player.x * 32,player.y * 32, 32, 32);
+					player.x --;
+					player.moves ++;
+				}
+				else {
+					player.loc ++;
+				}
+			}
+			break;
+		case 65: //A pressed
+			if (player.x != 0){
+				player.loc --;
+				if (maze[player.loc].state != 1){
+					ctx.clearRect(player.x * 32,player.y * 32, 32, 32);
+					player.x --;
+					player.moves ++;
+				}
+				else {
+					player.loc ++;
+				}
+			}
+			break;
+			                    case 40 :  /* Down arrow pressed */
+			if (player.y != 14){
+				player.loc += 15;
+				if (maze[player.loc].state != 1){
+					ctx.clearRect(player.x * 32,player.y * 32, 32, 32);
+					player.y ++;
+					player.moves ++;
+				}
+				else {
+					player.loc -= 15;
+				}
+			}
+                        break;
+		case 83: //Down, S
+			if (player.y != 14){
+				player.loc += 15;
+				if (maze[player.loc].state != 1){
+					ctx.clearRect(player.x * 32,player.y * 32, 32, 32);
+					player.y ++;
+					player.moves ++;
+				}
+				else {
+					player.loc -= 15;
+				}
+			}
+			break;
+			
+			                    case 38:  /* Up arrow was pressed */
+			if (player.y != 0){
+				player.loc -= 15;
+				if (maze[player.loc].state != 1){
+					ctx.clearRect(player.x * 32,player.y * 32, 32, 32);
+					player.y --;
+					player.moves ++;
+				}
+				else {
+					player.loc += 15;
+				}
+			}
+                        break;
+		case 87: //Up, W
+			if (player.y != 0){
+				player.loc -= 15;
+				if (maze[player.loc].state != 1){
+					ctx.clearRect(player.x * 32,player.y * 32, 32, 32);
+					player.y --;
+					player.moves ++;
+				}
+				else {
+					player.loc += 15;
+				}
+			}
+			break;
+	}
+	
+	ctx.drawImage(dog,player.x * 32,player.y * 32,32,32);
+	if (maze[player.loc].state == 2){
+		alert("You win!");
+		location.reload();// refresh page
+	}
+	
+	document.getElementById("moves").innerHTML = "Moves: " + player.moves;
+}
+
+function start(){
+	for (var i = 0;i < 15 * 15;i++){
+		if (maze[i].state == 1)
+			ctx.drawImage(wall,maze[i].x * 32, maze[i].y * 32, 30, 30);
+		if (maze[i].state == 2)
+			ctx.drawImage(bone,maze[i].x * 32, maze[i].y * 32, 30, 30);
+	}
+	ctx.drawImage(dog,player.x * 32,player.y * 32,32,32);
+	
+	window.addEventListener("keydown", keyPress, true);
+}
+
+</script>
+		</body>
+</html>
