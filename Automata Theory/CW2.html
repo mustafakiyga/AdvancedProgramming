@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<!-- saved from url=(0045)https://maeyler.github.io/Auto/work/NFA1.html -->
+<html lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width">
+    <title>Classwork 2 </title>
+</head>
+
+<body>
+
+<h2 id="title">NFA for (1|0)*00</h2>
+
+<p>Non-deterministic and deterministic finite automaton</p>
+
+RegExp = /00$/<br><br>
+Loop Limit = <input id="final" type="text" value="50" onchange="test()" style="width:30px"> 
+<input id="final2" type="button" value="Run" onchange="test()">
+
+<pre id="out"></pre>
+
+<hr>
+<b>NFA</b>
+
+<style>
+    table { 
+        border-collapse: collapse; 
+        margin: 0 50px; 
+    }
+    th { 
+        color: blue; 
+        padding: 5px 12px; 
+    }
+    td { 
+        border: 1px solid blue; 
+        padding: 5px 12px; 
+        text-align: center; 
+    }
+</style>
+<table>
+<tbody><tr><th></th><th>0</th><th>1</th></tr>
+<tr><th>&gt; a</th><td>ab</td><td>a</td></tr>
+<tr><th> b</th><td>c</td><td>ϕ</td></tr>
+<tr><th>* c</th><td>ϕ</td><td>ϕ</td></tr>
+</tbody>
+</table>
+
+<b>DFA</b>
+
+<table>
+<tbody><tr><th></th><th>0</th><th>1</th></tr>
+<tr><th>&gt; x</th><td>y</td><td>x</td></tr>
+<tr><th> y</th><td>z</td><td>x</td></tr>
+<tr><th>* z</th><td>z</td><td>x</td></tr>
+</tbody>
+
+</table>
+
+<pre id="sample">function delta(q, c) { // (1|0)*10<br>    if (q=='a' &amp;&amp; c=='0') return 'a'<br>    if (q=='a' &amp;&amp; c=='1') return 'ab'<br>    if (q=='b' &amp;&amp; c=='0') return 'c' <br>    return '';  //default -- no transition<br>}<br>function accept(w, F='c', Q='a') {<br>    //w: input String<br>    //F: final state(s)<br>    //Q: current state(s)<br>    let i = 0, txt = Q<br>    while (i &lt; w.length) {<br>        let c = w[i], T=''<br>        for (let q of Q) <br>            T = union(T, delta(q, c))<br>        Q = T<br>        if (Q == '') break<br>        i++; txt += ", "+c+" -&gt; "+Q+'\n'+Q<br>    }<br>    input.selectionStart = i<br>    input.selectionEnd = i+1<br>    let a = intersect(Q, F).length &gt; 0<br>    return txt+'  '+(a? "Accept" : "Reject")<br>}</pre>
+
+<hr>
+
+<script>
+"use strict";
+function union(a, b) { //set operation using strings
+    let s = a
+    for (let x of b) if (!a.includes(x)) s += x
+    return s
+}
+function intersect(a, b) {
+    let s = ''
+    for (let x of b) if (a.includes(x)) s += x
+    return s
+}
+function deltanfa(q, c) { // (1|0)*00
+    if (q=='a' && c=='0') return 'ab'
+    if (q=='a' && c=='1') return 'a'
+    if (q=='b' && c=='0') return 'c' 
+    return '';  //default -- no transition
+}
+function delta(q, c) { // (1|0)*00
+    if (q=='x' && c=='0') return 'y'
+    if (q=='x' && c=='1') return 'x'
+    if (q=='y' && c=='0') return 'z' 
+	if (q=='y' && c=='1') return 'x' 
+	if (q=='z' && c=='0') return 'z' 
+	if (q=='z' && c=='1') return 'x' 
+
+	return '';  //default -- no transition
+}
+function acceptnfa(w, F='c', Q='a') {
+    //w: input String
+    //F: final state(s)
+    //Q: current state(s)
+    let i = 0, txt = Q
+    while (i < w.length) {
+        let c = w[i], T=''
+        for (let q of Q) 
+            T = union(T, deltanfa(q, c))
+        Q = T
+        if (Q == '') break
+        i++; txt += ", "+c+" -> "+Q+'\n'+Q
+    }
+
+    let a = intersect(Q, F).length > 0
+    return a
+}
+function accept(w, F='z', Q='x') {
+    //w: input String
+    //F: final state(s)
+    //Q: current state(s)
+    let i = 0, txt = Q
+    while (i < w.length) {
+        let c = w[i], T=''
+        for (let q of Q) 
+            T = union(T, delta(q, c))
+        Q = T
+        if (Q == '') break
+        i++; txt += ", "+c+" -> "+Q+'\n'+Q
+    }
+
+    let m = intersect(Q, F).length > 0
+    return m
+}
+function test2() {
+	let a = [], e =/00$/
+     for (let n=1; n<50; n++) {
+          let w = n.toString(2)  // to binary
+          if (e.test(w)) a.push(w);
+     }
+	 
+	 for (let n=0; n<a.length; n++) {
+        let s = accept(a[n], final.value);
+		console.log(s);
+     }
+
+
+}
+function test() {
+out.innerHTML  = "";
+	let a = [], e =/00$/
+	console.log("NFA :")
+		for (let n=1; n<final.value; n++) {
+        let w = n.toString(2)  // to binary
+			if (acceptnfa(w)){
+				let s = accept(w);
+				
+				console.log(w + " ---> " + s);
+			}
+		}
+	console.log("DFA :")
+		for (let n=1; n<final.value; n++) {
+        let w = n.toString(2)  // to binary
+			if (accept(w)){
+				let s = acceptnfa(w);
+				out.innerHTML += w + " ---> " + s+ "\n";
+				console.log(w + " ---> " + s);  
+			}
+		}
+	console.log("RegExp :")
+     for (let n=1; n<final.value; n++) {
+          let w = n.toString(2)  // to binary
+          if (e.test(w)){
+				let s = acceptnfa(w);
+				console.log(w + " ---> " + s); 
+		   }		  
+     }
+	 
+}
+
+
+	 
+    title.innerText = document.title;
+    sample.innerText = delta + accept ;
+    test();
+</script>
+
+
+</body></html>
