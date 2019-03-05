@@ -138,30 +138,33 @@ function test2() {
 function test() {
 out.innerHTML  = "";
 	let a = [], e =/00$/
-	console.log("NFA :")
+	out.innerHTML += "NFA : ";
 		for (let n=1; n<final.value; n++) {
         let w = n.toString(2)  // to binary
 			if (acceptnfa(w)){
 				let s = accept(w);
+				out.innerHTML += n + " ";
 				
-				console.log(w + " ---> " + s);
 			}
-		}
-	console.log("DFA :")
+		}out.innerHTML += "<br>"
+	out.innerHTML += "DFA : ";
 		for (let n=1; n<final.value; n++) {
         let w = n.toString(2)  // to binary
 			if (accept(w)){
 				let s = acceptnfa(w);
-				out.innerHTML += w + " ---> " + s+ "\n";
-				console.log(w + " ---> " + s);  
+				out.innerHTML += n + " ";
+				
 			}
 		}
-	console.log("RegExp :")
+		out.innerHTML += "<br>"
+	
+	out.innerHTML += "RegExp : ";
      for (let n=1; n<final.value; n++) {
           let w = n.toString(2)  // to binary
           if (e.test(w)){
 				let s = acceptnfa(w);
-				console.log(w + " ---> " + s); 
+				out.innerHTML += n + " ";
+				
 		   }		  
      }
 	 
