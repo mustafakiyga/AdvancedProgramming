@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<!-- saved from url=(0047)https://maeyler.github.io/Auto/work/RegExp.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width">
+    <title>Regular Expressions </title>
+  <style>
+  /* pre { border: solid 1px } */
+    #pat { width: 90px; }
+    #inp { width: 250px; }
+    .stringfound { color: #00F; }
+	.arrayfound { color: #F60; }
+  </style>
+</head>
+
+<body>
+<h2 id="title">Regular Expressions</h2>
+<b>Input:</b>
+<p>
+<textarea onkeyup="checkRE()" rows="10" cols="50" id = "inp">
+var number = [1243,33,4324]<br>
+var string="Fatih"+"Sultan"+"Mehmet" 
+</textarea>
+
+
+</p>
+<p id="out"></p>
+
+<hr>
+<!--b>Sample code</b>
+<pre id="sample"></pre-->
+
+<!--p>Ref: <a href="https://emrahtema.github.io/Automata/regexp/EmrahTema_Regexp.html" target="ExternalDocument">Term project by Emrah Tema</a-->
+</p>
+
+    <p>Ref: <a href="https://regexr.com/" target="ExternalDocument">Regexr</a>
+    </p>
+	
+	    <p><b>Hazırlayanlar:</b> <br>Fatih GEZEN <br>Mustafa KIYGA
+    </p>
+
+
+<script>
+"use strict";
+
+const ptrn = ['(?<!\\[)"[A-z0-9,.!]*"(?!\])','\[[A-z0-9,.!"]*\]'];
+function setValues() {
+    inp.value = word[menu.selectedIndex];
+    checkRE();
+}
+function checkRE() {
+    if (inp.value) {
+        const exp1 = new RegExp(ptrn[0],'g');
+        const str1 = "<span class=stringfound>$&</span>";
+		const exp2 = new RegExp(ptrn[1]);
+        const str2 = "<span class=arrayfound>$&</span>";
+        out.innerHTML = inp.value.replace(exp1, str1).replace(exp2,str2);
+    }
+}
+    /*sample.innerText = setValues.toString()+"\n"+checkRE.toString();
+    title.innerText = document.title; setValues();*/
+
+checkRE();
+</script>
+
+
+
+</body></html>
