@@ -212,6 +212,9 @@ function variable() {
 }
 function withValue() {
     let i = identifier();
+	if(tok.kind!=ASSIGN){
+		return i;
+	}
     match(ASSIGN);
     let e = factor();
     return new WithValue(i, e);
