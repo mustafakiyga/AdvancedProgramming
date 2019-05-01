@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Conversion From NFA to DFA </title>
+
+</head>
+
+<body>
+
+
+
+<style>
+    #cfg { 
+        margin: 10px 50px; 
+        color: blue; 
+        font-weight: bold; 
+    }
+</style>
+
+
+
+<h2>Problem Statement</h2>
+<p>Let <b>X = (Q<sub>x</sub>, ∑, δ<sub>x</sub>, q<sub>0</sub>, F<sub>x</sub>)</b> be an NDFA which accepts the language L(X). We have to design an equivalent DFA <b>Y = (Q<sub>y</sub>, ∑, δ<sub>y</sub>, q<sub>0</sub>, F<sub>y</sub>)</b> such that <b>L(Y) = L(X)</b>. The following procedure converts the NDFA to its equivalent DFA −</p>
+<h2>Algorithm</h2>
+<p><b>Input</b> − An NDFA</p>
+<p><b>Output</b> − An equivalent DFA</p>
+<p><b>Step 1</b> − Create state table from the given NDFA.</p>
+<p><b>Step 2</b> − Create a blank state table under possible input alphabets for the equivalent DFA.</p>
+<p><b>Step 3</b> − Mark the start state of the DFA by q0 (Same as the NDFA).</p>
+<p><b>Step 4</b> − Find out the combination of States {Q<sub>0</sub>, Q<sub>1</sub>,... , Q<sub>n</sub>} for each possible input alphabet.</p>
+<p><b>Step 5</b> − Each time we generate a new DFA state under the input alphabet columns, we have to apply step 4 again, otherwise go to step 6.</p>
+<p><b>Step 6</b> − The states which contain any of the final states of the NFA are the final states of the equivalent DFA.</p>
+
+<h2>Conversion From NFA to DFA</h2>
+<table border=0>
+    <tr>
+        <td><img src="NFA1.png"></td>
+		<td><button style="width:120px">Previous Step</button></td>
+		<td><button style="width:120px" disabled>Next Step</button></td>
+        <td><img src="DFA1.png"></td>
+   
+</table>
+
+
+
+</body>
+</html>
