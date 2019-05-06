@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
@@ -9,6 +11,11 @@
 
 <body>
 
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 
 
 <style>
@@ -17,9 +24,28 @@
         color: blue; 
         font-weight: bold; 
     }
+	
+	@media (max-width: 375px) {
+		img {
+			width: 100%;
+		}	
+	}
+	
+	.table td {
+		height: 49px !important;
+	}
+	
+	p {
+		padding: 10px;
+	}
 </style>
 
+<div class="container-fluid m-3" >
 
+    <div class="row">
+	
+    <div class="col--12">
+  
 
 <h2>Problem Statement</h2>
 <p>Let <b>X = (Q<sub>x</sub>, ∑, δ<sub>x</sub>, q<sub>0</sub>, F<sub>x</sub>)</b> be an NDFA which accepts the language L(X). We have to design an equivalent DFA <b>Y = (Q<sub>y</sub>, ∑, δ<sub>y</sub>, q<sub>0</sub>, F<sub>y</sub>)</b> such that <b>L(Y) = L(X)</b>. The following procedure converts the NDFA to its equivalent DFA −</p>
@@ -34,16 +60,311 @@
 <p><b>Step 6</b> − The states which contain any of the final states of the NFA are the final states of the equivalent DFA.</p>
 
 <h2>Conversion From NFA to DFA</h2>
-<table border=0>
+
+
+  <h1>Two Unequal Responsive Columns</h1>
+  <p>Resize the browser window to see the effect.</p>
+  <p>The columns will automatically stack on top of each other when the screen is less than 576px wide.</p>
+  </div>
+  </div>
+  <div class="table-responsive">
+<table class="table table-striped" id="asd">
+  <thead>
     <tr>
-        <td><img src="NFA1.png"></td>
-		<td><button style="width:120px">Previous Step</button></td>
-		<td><button style="width:120px" disabled>Next Step</button></td>
-        <td><img src="DFA1.png"></td>
-   
+      <th scope="col">&nbsp&nbsp&nbsp&nbsp&nbspδ</th>
+      <th scope="col">0</th>
+      <th scope="col">1</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">⮕*A</th>
+      <td>B</td>
+      <td>X</td>
+      
+    </tr>
+    <tr>
+      <th scope="row">&nbsp&nbsp&nbsp&nbsp&nbspB</th>
+      <td>X</td>
+      <td>AC</td>
+
+    </tr>
+    <tr>
+      <th scope="row">&nbsp&nbsp&nbsp&nbsp&nbspC</th>
+      <td>A</td>
+      <td>X</td>
+  
+    </tr>
+  </tbody>
 </table>
+</div>
+  <div class="row">
+
+  
+    <div class="col-sm-12" "><img src="1.png"></div>
+	
+	</div>
+	
+  <br>
+  
+    <div class="row">
+	<div class="col-sm-12" "><button type="button" id="previous" class="btn btn-primary" style="width:125px" disabled onclick="stepPrevious()">Previous Step</button> &nbsp<button type="button" class="btn btn-primary" id="next" style="width:125px" onclick="stepNext()">Next Step</button></div>
+    
+  </div>
+  
+  <br>
+  
+    <div class="row">
+     <div class="col-sm-12" "><img id="NFAtoDFA" src=""></div>
+  </div>
+  
+  <br>
+  
+  <div class="table-responsive">
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">&nbsp&nbsp&nbsp&nbsp&nbspδ</th>
+      <th scope="col">0</th>
+      <th scope="col">1</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    <tr id="row1">
+      <th scope="row"></th>
+      <td></td>
+      <td></td>
+    </tr>
+	
+    <tr id="row2">
+      <th scope="row"></th>
+      <td ></td>
+      <td ></td>
+      
+    </tr>
+	
+    <tr id="row3">
+      <th scope="row"></th>
+      <td ></td>
+      <td ></td>
+      
+    </tr>
+	
+	<tr id="row4">
+      <th scope="row"></th>
+      <td ></td>
+      <td ></td>
+    </tr>
+	
+	<tr id="row5">
+      <th scope="row"></th>
+      <td ></td>
+      <td ></td>
+    </tr>
+	
+  </tbody>
+</table>
+</div>
+  
+</div>
 
 
 
+
+
+<p>Ref: <a href="https://www.tutorialspoint.com/automata_theory/ndfa_to_dfa_conversion.htm" 
+   target="ExternalDocument">NDFA to DFA Conversion</a>
+</p>
+	
+
+<script>
+var count = 0;
+  
+  
+
+function stepNext() {
+  var text;
+
+
+  switch(count) {
+    case 0:
+		stepOne();
+		document.getElementById("NFAtoDFA").src="NFAtoDFA1.png";
+		count++;
+		document.getElementById("previous").disabled = false;
+		break;
+    case 1:
+		stepTwo();
+		document.getElementById("NFAtoDFA").src="NFAtoDFA2.png";
+		count++;
+		break;
+    case 2:
+		stepThree();
+		document.getElementById("NFAtoDFA").src="NFAtoDFA3.png";
+		count++;
+		break; 
+	case 3:
+		stepFour();
+		document.getElementById("NFAtoDFA").src="NFAtoDFA4.png";
+		count++;
+		break;
+	case 4:
+		stepFive();
+		document.getElementById("NFAtoDFA").src="NFAtoDFA5.png";
+		document.getElementById("next").disabled = true;
+		count++;
+		break;
+  }
+  
+}
+
+function stepPrevious() {
+	//count--;
+	console.log(count);
+
+
+  switch(count) {
+	case -1:
+		count=0;
+		break;
+    case 1:
+		stepPOne();
+		document.getElementById("NFAtoDFA").src="";
+		document.getElementById("previous").disabled = true;
+		count--;
+		break;
+    case 2:
+		stepPTwo();
+		document.getElementById("NFAtoDFA").src="NFAtoDFA1.png";
+		count--;
+		break; 
+	case 3:
+		stepPThree();
+		document.getElementById("NFAtoDFA").src="NFAtoDFA2.png";
+		count--;
+		break;
+	case 4:
+		stepPFour();
+		document.getElementById("NFAtoDFA").src="NFAtoDFA3.png";
+		count--;
+		break;
+			
+	case 5:
+		stepPFive();
+		document.getElementById("NFAtoDFA").src="NFAtoDFA4.png";
+		document.getElementById("next").disabled = false;
+		count--;
+		break;
+  }
+  
+}
+
+function stepOne(){
+	var Row = document.getElementById("row1");
+	var thCell = Row.getElementsByTagName("th");
+	
+	var tdCells = Row.getElementsByTagName("td");
+	
+	thCell[0].innerText = "               ⮕A"
+	tdCells[0].innerText = "B"
+	tdCells[1].innerText = "X"
+}
+function stepTwo(){
+	var Row = document.getElementById("row2");
+	var thCell = Row.getElementsByTagName("th");
+	
+	var tdCells = Row.getElementsByTagName("td");
+	
+	thCell[0].innerText = "B"
+	tdCells[0].innerText = "X"
+	tdCells[1].innerText = "AC"
+}
+function stepThree(){
+	var Row = document.getElementById("row3");
+	var thCell = Row.getElementsByTagName("th");
+	
+	var tdCells = Row.getElementsByTagName("td");
+	
+	thCell[0].innerText = "AC"
+	tdCells[0].innerText = "AB"
+	tdCells[1].innerText = "X"
+}
+function stepFour(){
+	var Row = document.getElementById("row4");
+	var thCell = Row.getElementsByTagName("th");
+	
+	var tdCells = Row.getElementsByTagName("td");
+	
+	thCell[0].innerText = "AB"
+	tdCells[0].innerText = "B"
+	tdCells[1].innerText = "AC"
+}
+function stepFive(){
+	var Row = document.getElementById("row5");
+	var thCell = Row.getElementsByTagName("th");
+	
+	var tdCells = Row.getElementsByTagName("td");
+	
+	thCell[0].innerText = "X"
+	tdCells[0].innerText = "X"
+	tdCells[1].innerText = "X"
+}
+function stepPOne(){
+	var Row = document.getElementById("row1");
+	var thCell = Row.getElementsByTagName("th");
+	
+	var tdCells = Row.getElementsByTagName("td");
+	
+	thCell[0].innerText = ""
+	tdCells[0].innerText = ""
+	tdCells[1].innerText = ""
+}
+function stepPTwo(){
+	var Row = document.getElementById("row2");
+	var thCell = Row.getElementsByTagName("th");
+	
+	var tdCells = Row.getElementsByTagName("td");
+	
+	thCell[0].innerText = ""
+	tdCells[0].innerText = ""
+	tdCells[1].innerText = ""
+}
+function stepPThree(){
+	var Row = document.getElementById("row3");
+	var thCell = Row.getElementsByTagName("th");
+	
+	var tdCells = Row.getElementsByTagName("td");
+	
+	thCell[0].innerText = ""
+	tdCells[0].innerText = ""
+	tdCells[1].innerText = ""
+}
+function stepPFour(){
+
+	var Row4 = document.getElementById("row4");
+	var thCell = Row4.getElementsByTagName("th");
+	
+	var tdCells = Row4.getElementsByTagName("td");
+	
+	thCell[0].innerText = ""
+	tdCells[0].innerText = ""
+	tdCells[1].innerText = ""
+}
+function stepPFive(){
+	var Row5 = document.getElementById("row5");
+	var thCell = Row5.getElementsByTagName("th");
+	
+	var tdCells = Row5.getElementsByTagName("td");
+	
+	thCell[0].innerText = ""
+	tdCells[0].innerText = ""
+	tdCells[1].innerText = ""
+}
+
+
+
+</script>
 </body>
 </html>
