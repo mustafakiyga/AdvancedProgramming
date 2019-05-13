@@ -48,23 +48,21 @@
   
 
 <h2>Problem Statement</h2>
-<p>Let <b>X = (Q<sub>x</sub>, ∑, δ<sub>x</sub>, q<sub>0</sub>, F<sub>x</sub>)</b> be an NDFA which accepts the language L(X). We have to design an equivalent DFA <b>Y = (Q<sub>y</sub>, ∑, δ<sub>y</sub>, q<sub>0</sub>, F<sub>y</sub>)</b> such that <b>L(Y) = L(X)</b>. The following procedure converts the NDFA to its equivalent DFA −</p>
+<p>Let <b>X = (Q<sub>x</sub>, ∑, δ<sub>x</sub>, q<sub>0</sub>, F<sub>x</sub>)</b> be an NFA which accepts the language L(X). We have to design an equivalent DFA <b>Y = (Q<sub>y</sub>, ∑, δ<sub>y</sub>, q<sub>0</sub>, F<sub>y</sub>)</b> such that <b>L(Y) = L(X)</b>. The following procedure converts the NDFA to its equivalent DFA −</p>
 <h2>Algorithm</h2>
-<p><b>Input</b> − An NDFA</p>
+<p><b>Input</b> − An NFA</p>
 <p><b>Output</b> − An equivalent DFA</p>
-<p><b>Step 1</b> − Create state table from the given NDFA.</p>
+<p><b>Step 1</b> − Create state table from the given NFA.</p>
 <p><b>Step 2</b> − Create a blank state table under possible input alphabets for the equivalent DFA.</p>
-<p><b>Step 3</b> − Mark the start state of the DFA by q0 (Same as the NDFA).</p>
-<p><b>Step 4</b> − Find out the combination of States {Q<sub>0</sub>, Q<sub>1</sub>,... , Q<sub>n</sub>} for each possible input alphabet.</p>
-<p><b>Step 5</b> − Each time we generate a new DFA state under the input alphabet columns, we have to apply step 4 again, otherwise go to step 6.</p>
+<p><b>Step 3</b> − Mark the start state of the DFA by A state (Same as the NFA).</p>
+<p><b>Step 4</b> − Find out the combination of States {Q<sub>0</sub>, Q<sub>1</sub>,... , Q<sub>n</sub>} for each possible input alphabet. (Our inputs are 0 and 1)</p>
+<p><b>Step 5</b> − Each time we generate a new DFA state (e.g. AC) under the input alphabet columns, we have to apply step 4 again, otherwise go to step 6.</p>
 <p><b>Step 6</b> − The states which contain any of the final states of the NFA are the final states of the equivalent DFA.</p>
 
 <h2>Conversion From NFA to DFA</h2>
+<br>
 
 
-  <h1>Two Unequal Responsive Columns</h1>
-  <p>Resize the browser window to see the effect.</p>
-  <p>The columns will automatically stack on top of each other when the screen is less than 576px wide.</p>
   </div>
   </div>
   <div class="table-responsive">
@@ -117,9 +115,12 @@
   
     <div class="row">
      <div class="col-sm-12" "><img id="NFAtoDFA" src=""></div>
+	 
+	 
   </div>
+  <p id="p1" ></p>
   
-  <br>
+
   
   <div class="table-responsive">
 <table class="table table-striped">
@@ -194,27 +195,32 @@ function stepNext() {
 		document.getElementById("NFAtoDFA").src="NFAtoDFA1.png";
 		count++;
 		document.getElementById("previous").disabled = false;
+		document.getElementById("p1").innerHTML = "δ(A,0) = B - δ(A,1) = X (Step3 & Step4)";
 		break;
     case 1:
 		stepTwo();
 		document.getElementById("NFAtoDFA").src="NFAtoDFA2.png";
 		count++;
+		document.getElementById("p1").innerHTML = "δ(B,0) = X - δ(B,1) = AC (Step 5)";
 		break;
     case 2:
 		stepThree();
 		document.getElementById("NFAtoDFA").src="NFAtoDFA3.png";
 		count++;
+		document.getElementById("p1").innerHTML = "δ(AC,0) = AB - δ(AC,1) = X (Step 5)";
 		break; 
 	case 3:
 		stepFour();
 		document.getElementById("NFAtoDFA").src="NFAtoDFA4.png";
 		count++;
+		document.getElementById("p1").innerHTML = "δ(AB,0) = B - δ(AB,1) = AC (Step 5)";
 		break;
 	case 4:
 		stepFive();
 		document.getElementById("NFAtoDFA").src="NFAtoDFA5.png";
 		document.getElementById("next").disabled = true;
 		count++;
+		document.getElementById("p1").innerHTML = "δ(X,0) = X - δ(X,1) = X (Step 6)";
 		break;
   }
   
@@ -234,26 +240,31 @@ function stepPrevious() {
 		document.getElementById("NFAtoDFA").src="";
 		document.getElementById("previous").disabled = true;
 		count--;
+		document.getElementById("p1").innerHTML = "";
 		break;
     case 2:
 		stepPTwo();
 		document.getElementById("NFAtoDFA").src="NFAtoDFA1.png";
 		count--;
+		document.getElementById("p1").innerHTML = "δ(A,0) = B - δ(A,1) = X (Step3 & Step4)";
 		break; 
 	case 3:
 		stepPThree();
 		document.getElementById("NFAtoDFA").src="NFAtoDFA2.png";
+		document.getElementById("p1").innerHTML = "δ(B,0) = X - δ(B,1) = AC (Step 5)";
 		count--;
 		break;
 	case 4:
 		stepPFour();
 		document.getElementById("NFAtoDFA").src="NFAtoDFA3.png";
+		document.getElementById("p1").innerHTML = "δ(AC,0) = AB - δ(AC,1) = X (Step 5)";
 		count--;
 		break;
 			
 	case 5:
 		stepPFive();
 		document.getElementById("NFAtoDFA").src="NFAtoDFA4.png";
+		document.getElementById("p1").innerHTML = "δ(AB,0) = B - δ(AB,1) = AC (Step 5)";
 		document.getElementById("next").disabled = false;
 		count--;
 		break;
@@ -267,7 +278,7 @@ function stepOne(){
 	
 	var tdCells = Row.getElementsByTagName("td");
 	
-	thCell[0].innerText = "               ⮕A"
+	thCell[0].innerText = "⮕A"
 	tdCells[0].innerText = "B"
 	tdCells[1].innerText = "X"
 }
@@ -302,14 +313,23 @@ function stepFour(){
 	tdCells[1].innerText = "AC"
 }
 function stepFive(){
-	var Row = document.getElementById("row5");
-	var thCell = Row.getElementsByTagName("th");
+	var Row5 = document.getElementById("row5");
+	var Row1 = document.getElementById("row1");
+	var Row3 = document.getElementById("row3");
+	var Row4 = document.getElementById("row4");
+	var th5Cell = Row5.getElementsByTagName("th");
+	var th1Cell = Row1.getElementsByTagName("th");
+	var th3Cell = Row3.getElementsByTagName("th");
+	var th4Cell = Row4.getElementsByTagName("th");
 	
-	var tdCells = Row.getElementsByTagName("td");
+	var td5Cells = Row5.getElementsByTagName("td");
 	
-	thCell[0].innerText = "X"
-	tdCells[0].innerText = "X"
-	tdCells[1].innerText = "X"
+	th5Cell[0].innerText = "X"
+	th1Cell[0].innerText = "⮕*A"
+	th3Cell[0].innerText = "*AC"
+	th4Cell[0].innerText = "*AB"
+	td5Cells[0].innerText = "X"
+	td5Cells[1].innerText = "X"
 }
 function stepPOne(){
 	var Row = document.getElementById("row1");
@@ -353,6 +373,27 @@ function stepPFour(){
 	tdCells[1].innerText = ""
 }
 function stepPFive(){
+	
+	var Row1 = document.getElementById("row1");
+	var Row3 = document.getElementById("row3");
+	var Row4 = document.getElementById("row4");
+	
+	var th1Cell = Row1.getElementsByTagName("th");
+	var th3Cell = Row3.getElementsByTagName("th");
+	var th4Cell = Row4.getElementsByTagName("th");
+	
+	
+	
+	
+	th1Cell[0].innerText = "⮕A"
+	th3Cell[0].innerText = "AC"
+	th4Cell[0].innerText = "AB"
+	
+	
+
+
+
+
 	var Row5 = document.getElementById("row5");
 	var thCell = Row5.getElementsByTagName("th");
 	
